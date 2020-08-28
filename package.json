@@ -6,7 +6,7 @@
   "scripts": {
     "migrate": "npx sequelize-cli db:migrate",
     "test": "jest",
-    "dev": "nodemon --exec babel-node ./api/index.js"
+    "dev": "nodemon -L --exec babel-node ./api/index.js"
   },
   "keywords": [],
   "author": "",

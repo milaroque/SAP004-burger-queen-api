@@ -6,8 +6,12 @@ module.exports = (sequelize, DataTypes) => {
     quantity: DataTypes.INTEGER,
   }, {});
   ProductsOrder.associate = function(models) {
-    ProductsOrder.belongsTo(models.Product)
-    ProductsOrder.belongsTo(models.Order)
+    ProductsOrder.belongsTo(models.Product, {
+      foreignKey: 'productId'
+    })
+    ProductsOrder.belongsTo(models.Order, {
+      foreignKey: 'orderId'
+    })
   };
   return ProductsOrder;
 };

@@ -8,9 +8,6 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      active: {
-        type: Sequelize.BOOLEAN
-      },
       table: {
         type: Sequelize.INTEGER
       },
