@@ -1,7 +1,8 @@
 import express from 'express'
 import bodyParser from 'body-parser'
-import routes from './server/src/routes/ProductRoutes';
+import routes from './server/src/routes/ProductRoutes'
 import routesOrder from './server/src/routes/OrderRoutes'
+import routesUser from './server/src/routes/UserRoutes'
 
 const app = express()
 app.use(bodyParser.json())
@@ -11,6 +12,7 @@ const port = process.env.PORT || 3000
 
 app.use('/api/product', routes);
 app.use('/api/order', routesOrder);
+app.use('/api/user', routesUser);
 
 app.get('*', (req, res) => res.status(200).send('Esta é a API do Burger Queen.'))
 
