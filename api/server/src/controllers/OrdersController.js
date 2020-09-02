@@ -6,19 +6,36 @@ const util = new Util()
 
 class OrderController {
   static async all(req, res) {
-    const products = await OrderService.all()
-    if (products.length > 0) {
-      util.setSuccess(200, 'Orders retrieved', products)
+    const orders = await OrderService.all()
+    if (orders.length > 0) {
+      util.setSuccess(200, 'Orders retrieved', orders)
     }else {
       util.setSuccess(200, 'No Order found')
     }
     return util.send(res)
   }
-  static async getById(req, res) {
+
+  static async getOrder(req, res) {
     const { id } = req.params
-    const order = await OrderService.getById(id)
-    util.setSuccess(200, 'Order retrieved', order)
-    return util.send(res)
+
+    if (!Number(id)) {
+      util.setError(400, 'Please input a valid numeric value')
+      return util.send(res)
+    }
+
+    try {
+      const theOrder = await OrderService.getOrder(id)
+
+      if (!theOrder) {
+        util.setError(404, `Cannot find Order with the id ${id}`)
+      } else {
+        util.setSuccess(200, 'Found Order', theOrder)
+      }
+      return util.send(res)
+    } catch (error) {
+      util.setError(404, error)
+      return util.send(res)
+    }
   }
     static async getItemsById(req, res) {
       const { id } = req.params
@@ -67,29 +84,6 @@ class OrderController {
         util.setError(404, `Cannot find Order with the id: ${id}`)
       } else {
         util.setSuccess(200, 'Order updated', updateOrder)
-      }
-      return util.send(res)
-    } catch (error) {
-      util.setError(404, error)
-      return util.send(res)
-    }
-  }
-
-  static async getOrder(req, res) {
-    const { id } = req.params
-
-    if (!Number(id)) {
-      util.setError(400, 'Please input a valid numeric value')
-      return util.send(res)
-    }
-
-    try {
-      const theOrder = await OrderService.getOrder(id)
-
-      if (!theOrder) {
-        util.setError(404, `Cannot find Order with the id ${id}`)
-      } else {
-        util.setSuccess(200, 'Found Order', theOrder)
       }
       return util.send(res)
     } catch (error) {

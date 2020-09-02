@@ -10,9 +10,9 @@ app.use(bodyParser.urlencoded({ extended: false }))
 
 const port = process.env.PORT || 3000
 
-app.use('/api/product', routes);
-app.use('/api/order', routesOrder);
-app.use('/api/user', routesUser);
+app.use('/products', routes);
+app.use('/orders', routesOrder);
+app.use('/users', routesUser);
 
 app.get('*', (req, res) => res.status(200).send('Esta é a API do Burger Queen.'))
 

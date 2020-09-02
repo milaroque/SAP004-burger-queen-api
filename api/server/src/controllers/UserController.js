@@ -93,7 +93,7 @@ class UserController {
       if (userToDelete) {
         util.setSuccess(200, 'User deleted')
       } else {
-        util.setError(404, ` with the id ${id} cannot be found`)
+        util.setError(404, `User with the id ${id} cannot be found`)
       }
       return util.send(res)
     } catch (error) {
